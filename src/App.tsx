@@ -59,12 +59,14 @@ function App() {
   }
 
   return (
-    <div style={{ display: "grid", gap: 50, placeItems: "center" }}>
+    <div className="container">
+      <h1>Retio is small and fast SVG to PNG resizer</h1>
+
       <div className="actions">
         <label className="upload-btn btn" htmlFor="upload-file">
           Upload SVG
         </label>
-        <input style={{ display: "none" }} type="file" id="upload-file" accept=".svg" onChange={loadFile} />
+        <input className="invisible" type="file" id="upload-file" accept=".svg" onChange={loadFile} />
 
         <a className="btn" ref={downloadRef}>
           Download
@@ -73,9 +75,10 @@ function App() {
 
       <div>
         <div>
-          <label style={{ marginRight: "1rem" }} htmlFor="width">
-            width:
+          <label   htmlFor="width">
+            Width:
           </label>
+
           <input
             type="number"
             name="w"
@@ -93,9 +96,10 @@ function App() {
         </div>
 
         <div>
-          <label style={{ marginRight: "1rem" }} htmlFor="width">
-            height:
+          <label htmlFor="width">
+            Height:
           </label>
+
           <input
             type="number"
             name="h"
@@ -113,8 +117,8 @@ function App() {
         </div>
       </div>
 
-      <div style={{ overflow: "hidden", width: 800, height: 600 }}>
-        <img ref={imgRef} src={img} style={{ display: "none" }} onLoad={drawToCanvas} />
+      <div style={{ overflow: "hidden", maxWidth: 800, maxHeight: 520 }}>
+        <img ref={imgRef} src={img} className="invisible" onLoad={drawToCanvas} />
         <canvas ref={canvasRef} />
       </div>
     </div>
