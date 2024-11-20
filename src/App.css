@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+.container {
+  display: grid;
+  gap: 50px;
+  place-items: center;
+}
+
 .actions {
   display: flex;
   gap: 2rem;
@@ -28,4 +34,8 @@
   max-width: 800px;
   max-height: 600px;
   overflow: hidden;
+}
+
+.invisible {
+  display: none;
 }
