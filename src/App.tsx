@@ -9,37 +9,35 @@ function App() {
   const [width, setWidth] = useState(50);
   const [height, setHeight] = useState(50);
 
+  const imgRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const downloadRef = useRef<HTMLAnchorElement>(null);
 
-  useEffect(() => {
+  useEffect(() => drawToCanvas(), [width, height]);
+
+  function drawToCanvas() {
+    const img = imgRef.current;
     const canvas = canvasRef.current;
     const download = downloadRef.current;
 
-    if (!canvas || !download) return;
+    if (!canvas || !download || !img) return;
 
     const ctx = canvas.getContext("2d");
 
     if (!ctx) throw new Error("Coudn't get canvas context");
 
-    const image = new Image();
+    ctx.clearRect(0, 0, width, height);
 
-    image.src = img;
+    canvas.width = width;
+    canvas.height = height;
 
-    image.onload = () => {
-      ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(img, 0, 0, width, height);
 
-      canvas.width = width;
-      canvas.height = height;
+    const png = canvas.toDataURL("image/png");
 
-      ctx.drawImage(image, 0, 0, width, height);
-
-      const png = canvas.toDataURL("image/png");
-
-      download.download = `image-w${width}-h${height}.png`;
-      download.href = png;
-    };
-  });
+    download.download = `image-w${width}-h${height}.png`;
+    download.href = png;
+  }
 
   function loadFile(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
@@ -48,7 +46,6 @@ function App() {
 
     const fileData = files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(fileData);
 
     reader.addEventListener("loadend", (e) => {
       const { target } = e;
@@ -57,6 +54,8 @@ function App() {
 
       setImg(target.result.toString());
     });
+
+    reader.readAsDataURL(fileData);
   }
 
   return (
@@ -115,6 +114,7 @@ function App() {
       </div>
 
       <div style={{ overflow: "hidden", width: 800, height: 600 }}>
+        <img ref={imgRef} src={img} style={{ display: "none" }} onLoad={drawToCanvas} />
         <canvas ref={canvasRef} />
       </div>
     </div>
