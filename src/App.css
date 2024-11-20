@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 0.1rem;
   text-align: center;
 }
 
@@ -26,13 +26,19 @@
   background-color: #eeeeee;
 }
 
+.dim-inputs-wrapper {
+  display: grid;
+  gap: 1rem;
+  place-items: end;
+}
+
 .btn:hover {
   color: #535bf2;
 }
 
 .image-wrapper {
   max-width: 800px;
-  max-height: 600px;
+  max-height: 520px;
   overflow: hidden;
 }
 

@@ -73,11 +73,9 @@ function App() {
         </a>
       </div>
 
-      <div>
+      <div className="dim-inputs-wrapper">
         <div>
-          <label   htmlFor="width">
-            Width:
-          </label>
+          <label htmlFor="width">Width:</label>
 
           <input
             type="number"
@@ -96,14 +94,12 @@ function App() {
         </div>
 
         <div>
-          <label htmlFor="width">
-            Height:
-          </label>
+          <label htmlFor="height">Height:</label>
 
           <input
             type="number"
             name="h"
-            id="width"
+            id="height"
             value={height}
             step={1}
             min={1}
@@ -117,7 +113,7 @@ function App() {
         </div>
       </div>
 
-      <div style={{ overflow: "hidden", maxWidth: 800, maxHeight: 520 }}>
+      <div className="image-wrapper">
         <img ref={imgRef} src={img} className="invisible" onLoad={drawToCanvas} />
         <canvas ref={canvasRef} />
       </div>
